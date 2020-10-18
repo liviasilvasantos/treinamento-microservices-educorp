@@ -1,5 +1,9 @@
 package br.unicamp.educorp.microservices.cursos.api.aula4.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -98,4 +103,36 @@ public class CursosController {
 		return new ResponseEntity<List<Curso>>(cursos, HttpStatus.OK);
 	}
 
+	@GetMapping("/v4/cursos/hateoas/{id}")
+	public ResponseEntity<EntityModel<Curso>> getCursoHateoas(@PathVariable Integer id) {
+		log.info("buscando o curso hateoas {} na porta {}", id, getHostPorta());
+
+		Optional<Curso> curso = cursoRepository.findById(id);
+
+		if (curso.isPresent()) {
+			EntityModel<Curso> model = EntityModel.of(curso.get(), //
+					linkTo(methodOn(CursosController.class).getCurso(id)).withSelfRel(),
+					linkTo(methodOn(CursosController.class).getAllCursos()).withRel("all"));
+
+			return ResponseEntity.ok(model);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+	@GetMapping("/v4/cursos/hateoas")
+	public ResponseEntity<List<EntityModel<Curso>>> getAllCursoHateoas() {
+		log.info("buscando todos os curso hateoas na porta {}", getHostPorta());
+
+		List<EntityModel<Curso>> cursosModel = new ArrayList<EntityModel<Curso>>();
+		List<Curso> cursos = cursoRepository.findAll();
+
+		for (Curso c : cursos) {
+			cursosModel.add(EntityModel.of(c, //
+					linkTo(methodOn(CursosController.class).getCurso(c.getId())).withSelfRel(),
+					linkTo(methodOn(CursosController.class).getAllCursos()).withRel("all")));
+		}
+
+		return new ResponseEntity<List<EntityModel<Curso>>>(cursosModel, HttpStatus.OK);
+	}
 }
