@@ -5,8 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+// /import com.fasterxml.jackson.annotation.JsonFilter;
+
 @Entity
 @Table(name = "tbl_curso")
+//@JsonFilter("CursoFilter")
 public class Curso {
 
 	@Id
@@ -18,6 +21,10 @@ public class Curso {
 
 	@Column(name = "descricao_curso", length = 250, nullable = false)
 	private String descricao;
+
+	//	@JsonIgnore
+	@Column(name = "informacao_sensivel", length = 50)
+	private String informacaoSensivel;
 
 	public Curso() {
 		super();
@@ -52,6 +59,14 @@ public class Curso {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public String getInformacaoSensivel() {
+		return informacaoSensivel;
+	}
+
+	public void setInformacaoSensivel(String informacaoSensivel) {
+		this.informacaoSensivel = informacaoSensivel;
 	}
 
 	@Override
