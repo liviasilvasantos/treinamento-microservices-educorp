@@ -9,8 +9,8 @@ Em cada diretório de aula, está o zip contendo a estruturada gerada no momento
 
 ## Aula 2 - Primeira API Rest com Spring Boot
 
-GET /cursos [v1](http://localhost:8080/aula2/api/v1/cursos)  
-GET /cursos [v2](http://localhost:8080/aula2/api/v2/cursos)
+GET [/v1/cursos](http://localhost:8080/aula2/api/v1/cursos)  
+GET [/v2/cursos](http://localhost:8080/aula2/api/v2/cursos)
 
 ## Aula 4
 
