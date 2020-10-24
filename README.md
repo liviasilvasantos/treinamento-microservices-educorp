@@ -40,11 +40,11 @@ GET [/v5/cursos](http://localhost:8080/aula4/api/v5/cursos)
 
 ## Aula 5
 
-## Documentação de API
+### Documentação de API
 
 [Documentação Swagger](http://localhost:8080/aula5/api/swagger-ui/index.html)
 
-## Versionamento de API
+### Versionamento de API
 
 GET [/cursos/p](http://localhost:8080/aula5/api/cursos/p) -H "Accept: application/vnd.cursos.educorp-v1.0+json"  
 GET [/cursos/p](http://localhost:8080/aula5/api/cursos/p) -H "Accept: application/vnd.cursos.educorp-v2.0+json"  
@@ -53,4 +53,11 @@ GET [/cursos/h](http://localhost:8080/aula5/api/cursos/h) -H "API-VERSION=2"
 GET [/cursos/v/?version=1](http://localhost:8080/aula5/api/cursos/v/?version=1)  
 GET [/cursos/v/?version=2](http://localhost:8080/aula5/api/cursos/v/?version=2)  
 
-## Profile
+### Profile
+
+## Aula 7
+
+### Spring Devtools  
+
+GET [/v7/cursos](http://localhost:8080/aula7/api/v7/cursos)  
+
