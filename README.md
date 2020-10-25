@@ -61,3 +61,8 @@ GET [/cursos/v/?version=2](http://localhost:8080/aula5/api/cursos/v/?version=2)
 
 GET [/v7/cursos](http://localhost:8080/aula7/api/v7/cursos)  
 
+### Spring Actuator
+
+GET [/manager](http://localhost:8080/aula7/api/manager)  
+GET [/manager/info](http://localhost:8080/aula7/api/manager/info)  
+[Spring Boot Admin Server](http://localhost:8081/)
