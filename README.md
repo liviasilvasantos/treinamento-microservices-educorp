@@ -66,3 +66,11 @@ GET [/v7/cursos](http://localhost:8080/aula7/api/v7/cursos)
 GET [/manager](http://localhost:8080/aula7/api/manager)  
 GET [/manager/info](http://localhost:8080/aula7/api/manager/info)  
 [Spring Boot Admin Server](http://localhost:8081/)
+
+### Tratamento de Exceções
+
+GET [/v8/cursos/1](http://localhost:8080/aula7/api/v8/cursos/1)  
+GET [/v8/cursos/99](http://localhost:8080/aula7/api/v8/cursos/99)  
+POST [/v8/cursos](http://localhost:8080/aula7/api/v8/cursos)  
+GET [/v8/cursos/123456](http://localhost:8080/aula7/api/v8/cursos/123456)  
+
