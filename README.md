@@ -21,7 +21,8 @@ GET [/v3/cursos/{id}](http://localhost:8080/aula4/api/v3/cursos/{id})
 POST [/v3/cursos](http://localhost:8080/aula4/api/v3/cursos)  
 DELETE [/v3/cursos/{id}](http://localhost:8080/aula4/api/v3/cursos/{id})  
 PUT [/v3/cursos/{id}](http://localhost:8080/aula4/api/v3/cursos/{id})  
-POST [/v3/cursos/filter](http://localhost:8080/aula4/api/v3/cursos/filter)  
+@Deprecated POST [/v3/cursos/filter](http://localhost:8080/aula4/api/v3/cursos/filter)  
+GET [/v3/cursos/filter2?codigo={codigo}&descricao={descricao}](http://localhost:8080/aula4/api/v3/cursos/filter2?codigo={codigo}&descricao={descricao})
 
 ### Spring Hateoas
 
@@ -50,8 +51,7 @@ GET [/cursos/p](http://localhost:8080/aula5/api/cursos/p) -H "Accept: applicatio
 GET [/cursos/p](http://localhost:8080/aula5/api/cursos/p) -H "Accept: application/vnd.cursos.educorp-v2.0+json"  
 GET [/cursos/h](http://localhost:8080/aula5/api/cursos/h) -H "API-VERSION=1"  
 GET [/cursos/h](http://localhost:8080/aula5/api/cursos/h) -H "API-VERSION=2"  
-GET [/cursos/v/?version=1](http://localhost:8080/aula5/api/cursos/v/?version=1)  
-GET [/cursos/v/?version=2](http://localhost:8080/aula5/api/cursos/v/?version=2)  
+GET [/cursos/v/?version={version}](http://localhost:8080/aula5/api/cursos/v/?version={version})  
 
 ### Profile
 
@@ -69,8 +69,8 @@ GET [/manager/info](http://localhost:8080/aula7/api/manager/info)
 
 ### Tratamento de Exceções
 
-GET [/v8/cursos/1](http://localhost:8080/aula7/api/v8/cursos/1)  
-GET [/v8/cursos/99](http://localhost:8080/aula7/api/v8/cursos/99)  
+GET [/v8/cursos/{id_existente}](http://localhost:8080/aula7/api/v8/cursos/{id_existente})  
+GET [/v8/cursos/{id_inexistente}](http://localhost:8080/aula7/api/v8/cursos/{id_inexistente})  
 POST [/v8/cursos](http://localhost:8080/aula7/api/v8/cursos)  
-GET [/v8/cursos/123456](http://localhost:8080/aula7/api/v8/cursos/123456)  
+GET [/v8/cursos/{id_invalido}](http://localhost:8080/aula7/api/v8/cursos/{id_invalido})  
 
