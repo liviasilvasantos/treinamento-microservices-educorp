@@ -6,6 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 @SuppressWarnings("serial")
 @Entity
@@ -17,9 +20,12 @@ public class Curso implements Serializable {
 	private Integer id;
 
 	@Column(name = "codigo_curso", length = 5, nullable = false)
+	@NotBlank(message = "Campo Código é obrigatório")
+	@Length(min = 3, max = 5, message = "Campo Código deve ter entre 3 e 5 caracteres")
 	private String codigo;
 
 	@Column(name = "descricao_curso", length = 250, nullable = false)
+	@NotBlank(message = "Campo Descrição obrigatório")
 	private String descricao;
 
 	public Curso() {
