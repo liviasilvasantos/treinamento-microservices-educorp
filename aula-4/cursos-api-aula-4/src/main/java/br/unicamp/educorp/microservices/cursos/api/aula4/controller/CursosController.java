@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -57,13 +58,13 @@ public class CursosController {
 		log.info("buscando todos os cursos na porta {}", getHostPorta());
 		return new ResponseEntity<List<Curso>>(cursoRepository.findAll(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/v3/cursos/{id}")
 	public ResponseEntity<Curso> getCurso(@PathVariable Integer id) {
 		log.info("buscando o curso {} na porta {}", id, getHostPorta());
 		return new ResponseEntity<Curso>(cursoRepository.findById(id).get(), HttpStatus.OK);
 	}
-	
+
 	@PostMapping(value = "/v3/cursos")
 	public ResponseEntity<Curso> saveCurso(@RequestBody Curso curso) {
 		log.info("salvando novo curso {} na porta {}", curso, getHostPorta());
@@ -73,7 +74,7 @@ public class CursosController {
 			return new ResponseEntity<Curso>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@DeleteMapping("/v3/cursos/{id}")
 	public ResponseEntity<Curso> deleteCurso(@PathVariable Integer id) {
 		log.info("excluindo curso {} na porta {}", id, getHostPorta());
@@ -84,7 +85,7 @@ public class CursosController {
 			return new ResponseEntity<Curso>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@PutMapping(value = "/v3/cursos/{id}")
 	public ResponseEntity<Curso> saveCurso(@PathVariable Integer id, @RequestBody Curso curso) {
 		log.info("atualizando curso id {} na porta {}", id, getHostPorta());
@@ -100,12 +101,27 @@ public class CursosController {
 			return new ResponseEntity<Curso>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
+	@Deprecated
 	@PostMapping(value = "/v3/cursos/filter")
 	public ResponseEntity<List<Curso>> getCursoByFilter(@RequestBody FiltroCurso filtro) {
 		log.info("buscando o curso com filtro {} na porta {}", filtro, getHostPorta());
 
 		List<Curso> cursos = cursoRepository.findAllByCodigoContains(filtro.getCodigo());
+
+		if (cursos == null || cursos.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+
+		return new ResponseEntity<List<Curso>>(cursos, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/v3/cursos/filter2")
+	public ResponseEntity<List<Curso>> getCursoByFilter2(@ModelAttribute FiltroCurso filtro) {
+		log.info("buscando o curso com filtro {} na porta {}", filtro, getHostPorta());
+
+		List<Curso> cursos = cursoRepository.findAllByCodigoContainsAndDescricaoContains(filtro.getCodigo(),
+				filtro.getDescricao());
 
 		if (cursos == null || cursos.isEmpty()) {
 			return ResponseEntity.notFound().build();
@@ -149,7 +165,7 @@ public class CursosController {
 		return new ResponseEntity<List<EntityModel<Curso>>>(cursosModel, HttpStatus.OK);
 	}
 
-	//Jackson
+	// Jackson
 
 	@GetMapping("/v4/cursos/mapping")
 	public MappingJacksonValue getAllCursosMapping() {
@@ -163,7 +179,7 @@ public class CursosController {
 
 		return mapping;
 	}
-	
+
 	@GetMapping("/v4/cursos/dto")
 	public ResponseEntity<List<CursoDto>> getAllCursosDto() {
 		log.info("buscando todos os cursos dto na porta {}", getHostPorta());

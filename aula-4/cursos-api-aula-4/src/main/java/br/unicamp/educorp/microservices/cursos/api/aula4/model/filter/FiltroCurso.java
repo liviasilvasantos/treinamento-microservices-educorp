@@ -6,6 +6,7 @@ import java.io.Serializable;
 public class FiltroCurso implements Serializable {
 
 	private String codigo;
+	private String descricao;
 
 	public String getCodigo() {
 		return codigo;
@@ -15,9 +16,17 @@ public class FiltroCurso implements Serializable {
 		this.codigo = codigo;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	@Override
 	public String toString() {
-		return "FiltroCurso [codigo=" + codigo + "]";
+		return "FiltroCurso [codigo=" + codigo + ", descricao=" + descricao + "]";
 	}
 
 }
