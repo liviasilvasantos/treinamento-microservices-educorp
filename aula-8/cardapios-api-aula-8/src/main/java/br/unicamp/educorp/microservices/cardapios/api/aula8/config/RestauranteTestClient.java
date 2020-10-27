@@ -12,9 +12,9 @@ import br.unicamp.educorp.microservices.cardapios.api.aula8.model.dto.Restaurant
 import reactor.core.publisher.Mono;
 
 @Configuration
-public class RestauranteClient {
+public class RestauranteTestClient {
 
-	private static final Logger log = LoggerFactory.getLogger(RestauranteClient.class);
+	private static final Logger log = LoggerFactory.getLogger(RestauranteTestClient.class);
 
 	@Bean
 	public CommandLineRunner runRestTemplate(RestTemplate restTemplate) throws Exception {
