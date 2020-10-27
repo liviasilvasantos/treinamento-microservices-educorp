@@ -29,9 +29,14 @@ public class RestauranteClient {
 	public CommandLineRunner runWebClient() throws Exception {
 		return args -> {
 
-			WebClient client = WebClient.create("http://localhost:8180/restaurantes/api/restaurantes");
+			WebClient client = WebClient//
+					.create("http://localhost:8180/restaurantes/api");
 
-			Mono<RestauranteDto> outback = client.get().uri("/{id}", 2).retrieve().bodyToMono(RestauranteDto.class);
+			Mono<RestauranteDto> outback = client//
+					.get()//
+					.uri("/restaurantes/{id}", 2)//
+					.retrieve()//
+					.bodyToMono(RestauranteDto.class);
 
 			log.info("dados outback {}", outback.block());
 		};

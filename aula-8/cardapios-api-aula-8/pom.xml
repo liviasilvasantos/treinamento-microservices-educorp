@@ -59,12 +59,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.projectreactor/reactor-spring -->
-		<dependency>
-			<groupId>org.projectreactor</groupId>
-			<artifactId>reactor-spring</artifactId>
-			<version>1.0.1.RELEASE</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
