@@ -13,8 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
+import br.unicamp.educorp.microservices.cardapios.api.aula8.model.dto.RestauranteDto;
 
 @Entity
 @Table(name = "tbl_cardapio")
@@ -29,6 +32,9 @@ public class Cardapio implements Serializable {
 
 	@Column(name = "id_restaurante", nullable = false)
 	private Integer idRestaurante;
+
+	@Transient
+	private RestauranteDto restaurante;
 
 	@Column(name = "status", nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -77,6 +83,14 @@ public class Cardapio implements Serializable {
 
 	public void setItensCardapio(Set<ItemCardapio> itensCardapio) {
 		this.itensCardapio = itensCardapio;
+	}
+
+	public RestauranteDto getRestaurante() {
+		return restaurante;
+	}
+
+	public void setRestaurante(RestauranteDto restaurante) {
+		this.restaurante = restaurante;
 	}
 
 	@Override

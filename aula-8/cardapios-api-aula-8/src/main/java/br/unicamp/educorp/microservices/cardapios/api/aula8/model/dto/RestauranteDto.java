@@ -4,6 +4,7 @@ public class RestauranteDto {
 
 	private Integer id;
 	private String nome;
+	private String port;
 
 	public Integer getId() {
 		return id;
@@ -21,8 +22,17 @@ public class RestauranteDto {
 		this.nome = nome;
 	}
 
+	public String getPort() {
+		return port;
+	}
+
+	public void setPort(String port) {
+		this.port = port;
+	}
+
 	@Override
 	public String toString() {
-		return "RestauranteDto [id=" + id + ", nome=" + nome + "]";
+		return "RestauranteDto [id=" + id + ", nome=" + nome + ", port=" + port + "]";
 	}
+
 }

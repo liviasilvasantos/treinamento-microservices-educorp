@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -72,6 +73,9 @@ public class Restaurante implements Serializable {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurante")
 	private Set<HorarioEntrega> horariosEntrega;
+
+	@Transient
+	private String port;
 
 	public Restaurante() {
 		super();
@@ -214,6 +218,14 @@ public class Restaurante implements Serializable {
 
 	public void setHorariosEntrega(Set<HorarioEntrega> horariosEntrega) {
 		this.horariosEntrega = horariosEntrega;
+	}
+
+	public String getPort() {
+		return port;
+	}
+
+	public void setPort(String port) {
+		this.port = port;
 	}
 
 	@Override

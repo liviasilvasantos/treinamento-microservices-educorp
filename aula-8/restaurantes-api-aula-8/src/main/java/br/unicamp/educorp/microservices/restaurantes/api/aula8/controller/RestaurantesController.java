@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,16 +29,27 @@ public class RestaurantesController {
 	@Autowired
 	private RestaurantesService restaurantesService;
 
+	@Autowired
+	private Environment environment;
+
+	private String getHostPorta() {
+		return environment.getProperty("local.server.port");
+	}
+
 	@GetMapping
 	public ResponseEntity<List<Restaurante>> getAll() {
 		log.info("getAll");
-		return ResponseEntity.ok(restaurantesService.buscarRestaurantes());
+		List<Restaurante> restaurantes = restaurantesService.buscarRestaurantes();
+		restaurantes.forEach(r -> r.setPort(getHostPorta()));
+		return ResponseEntity.ok(restaurantes);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Restaurante> getById(@PathVariable Integer id) throws RestauranteNaoEncontradoException {
 		log.info("getById {}", id);
-		return ResponseEntity.ok(restaurantesService.buscarRestaurante(id));
+		Restaurante restaurante = restaurantesService.buscarRestaurante(id);
+		restaurante.setPort(getHostPorta());
+		return ResponseEntity.ok(restaurante);
 	}
 
 	@PostMapping()

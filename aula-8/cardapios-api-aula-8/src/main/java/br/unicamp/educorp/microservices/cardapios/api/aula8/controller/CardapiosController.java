@@ -1,6 +1,7 @@
 package br.unicamp.educorp.microservices.cardapios.api.aula8.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.unicamp.educorp.microservices.cardapios.api.aula8.client.RestauranteClient;
 import br.unicamp.educorp.microservices.cardapios.api.aula8.model.Cardapio;
+import br.unicamp.educorp.microservices.cardapios.api.aula8.model.dto.RestauranteDto;
 import br.unicamp.educorp.microservices.cardapios.api.aula8.repository.CardapiosRepository;
 
 @RestController
@@ -23,6 +26,9 @@ public class CardapiosController {
 	@Autowired
 	private CardapiosRepository cardapiosRepository;
 
+	@Autowired
+	private RestauranteClient restauranteClient;
+
 	@GetMapping
 	public ResponseEntity<List<Cardapio>> getAll() {
 		log.info("getAll");
@@ -32,6 +38,20 @@ public class CardapiosController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Cardapio> getById(@PathVariable Integer id) {
 		log.info("getById {}", id);
-		return ResponseEntity.ok(cardapiosRepository.findById(id).get());
+
+		Optional<Cardapio> cardapio = cardapiosRepository.buscarCardapioComItens(id);
+
+		if (cardapio.isPresent()) {
+
+			Cardapio c = cardapio.get();
+			RestauranteDto restaurante = restauranteClient.getRestaurante(c.getIdRestaurante());
+			c.setRestaurante(restaurante);
+
+			return ResponseEntity.ok(c);
+
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+
 	}
 }
