@@ -24,8 +24,8 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tbl_horario_entrega")
-public class HorarioEntrega implements Serializable {
+@Table(name = "tbl_horario_funcionamento")
+public class HorarioFuncionamento implements Serializable {
 
 	private static final long serialVersionUID = -7352458149835363617L;
 
@@ -50,11 +50,11 @@ public class HorarioEntrega implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Restaurante restaurante;
 
-	public HorarioEntrega() {
+	public HorarioFuncionamento() {
 		super();
 	}
 
-	public HorarioEntrega(DiaSemana diaSemana, Date horarioInicio, Date horarioFim, Restaurante restaurante) {
+	public HorarioFuncionamento(DiaSemana diaSemana, Date horarioInicio, Date horarioFim, Restaurante restaurante) {
 		super();
 		this.diaSemana = diaSemana;
 		this.horarioInicio = horarioInicio;

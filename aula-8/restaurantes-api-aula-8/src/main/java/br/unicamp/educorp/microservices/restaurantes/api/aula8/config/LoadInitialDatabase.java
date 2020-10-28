@@ -15,10 +15,10 @@ import br.unicamp.educorp.microservices.restaurantes.api.aula8.model.Categoria;
 import br.unicamp.educorp.microservices.restaurantes.api.aula8.model.DiaSemana;
 import br.unicamp.educorp.microservices.restaurantes.api.aula8.model.Estado;
 import br.unicamp.educorp.microservices.restaurantes.api.aula8.model.FaixaPreco;
-import br.unicamp.educorp.microservices.restaurantes.api.aula8.model.HorarioEntrega;
+import br.unicamp.educorp.microservices.restaurantes.api.aula8.model.HorarioFuncionamento;
 import br.unicamp.educorp.microservices.restaurantes.api.aula8.model.Pais;
 import br.unicamp.educorp.microservices.restaurantes.api.aula8.model.Restaurante;
-import br.unicamp.educorp.microservices.restaurantes.api.aula8.repository.HorariosEntregaRepository;
+import br.unicamp.educorp.microservices.restaurantes.api.aula8.repository.HorariosFuncionamentoRepository;
 import br.unicamp.educorp.microservices.restaurantes.api.aula8.repository.RestaurantesRepository;
 
 @Configuration
@@ -30,7 +30,7 @@ public class LoadInitialDatabase {
 
 	@Bean
 	public CommandLineRunner initialDatabase(RestaurantesRepository restaurantesRepository,
-			HorariosEntregaRepository horariosEntregaRepository) {
+			HorariosFuncionamentoRepository horariosEntregaRepository) {
 		return args -> {
 
 			Restaurante vegWrap = new Restaurante("Veg Wrap Fresh Food", //
@@ -45,25 +45,25 @@ public class LoadInitialDatabase {
 					"Campinas", Estado.SP, Pais.BR, Categoria.VEGETARIANA);
 			vegWrap = restaurantesRepository.save(vegWrap);
 
-			HorarioEntrega vegWrapH1 = new HorarioEntrega(DiaSemana.DOMINGO,
+			HorarioFuncionamento vegWrapH1 = new HorarioFuncionamento(DiaSemana.DOMINGO,
 					DateUtils.parseDate("18:30", HORARIO_PATTERN), DateUtils.parseDate("23:00", HORARIO_PATTERN),
 					vegWrap);
-			HorarioEntrega vegWrapH2 = new HorarioEntrega(DiaSemana.SEGUNDA,
+			HorarioFuncionamento vegWrapH2 = new HorarioFuncionamento(DiaSemana.SEGUNDA,
 					DateUtils.parseDate("18:30", HORARIO_PATTERN), DateUtils.parseDate("23:00", HORARIO_PATTERN),
 					vegWrap);
-			HorarioEntrega vegWrapH3 = new HorarioEntrega(DiaSemana.TERCA,
+			HorarioFuncionamento vegWrapH3 = new HorarioFuncionamento(DiaSemana.TERCA,
 					DateUtils.parseDate("18:30", HORARIO_PATTERN), DateUtils.parseDate("23:00", HORARIO_PATTERN),
 					vegWrap);
-			HorarioEntrega vegWrapH4 = new HorarioEntrega(DiaSemana.QUARTA,
+			HorarioFuncionamento vegWrapH4 = new HorarioFuncionamento(DiaSemana.QUARTA,
 					DateUtils.parseDate("18:30", HORARIO_PATTERN), DateUtils.parseDate("23:00", HORARIO_PATTERN),
 					vegWrap);
-			HorarioEntrega vegWrapH5 = new HorarioEntrega(DiaSemana.QUINTA,
+			HorarioFuncionamento vegWrapH5 = new HorarioFuncionamento(DiaSemana.QUINTA,
 					DateUtils.parseDate("18:30", HORARIO_PATTERN), DateUtils.parseDate("23:00", HORARIO_PATTERN),
 					vegWrap);
-			HorarioEntrega vegWrapH6 = new HorarioEntrega(DiaSemana.SEXTA,
+			HorarioFuncionamento vegWrapH6 = new HorarioFuncionamento(DiaSemana.SEXTA,
 					DateUtils.parseDate("18:30", HORARIO_PATTERN), DateUtils.parseDate("23:00", HORARIO_PATTERN),
 					vegWrap);
-			HorarioEntrega vegWrapH7 = new HorarioEntrega(DiaSemana.SABADO,
+			HorarioFuncionamento vegWrapH7 = new HorarioFuncionamento(DiaSemana.SABADO,
 					DateUtils.parseDate("18:30", HORARIO_PATTERN), DateUtils.parseDate("23:00", HORARIO_PATTERN),
 					vegWrap);
 
@@ -85,25 +85,25 @@ public class LoadInitialDatabase {
 					"Campinas", Estado.SP, Pais.BR, Categoria.CARNES);
 			outback = restaurantesRepository.save(outback);
 
-			HorarioEntrega outbackH1 = new HorarioEntrega(DiaSemana.DOMINGO,
+			HorarioFuncionamento outbackH1 = new HorarioFuncionamento(DiaSemana.DOMINGO,
 					DateUtils.parseDate("11:00", HORARIO_PATTERN), DateUtils.parseDate("22:00", HORARIO_PATTERN),
 					outback);
-			HorarioEntrega outbackH2 = new HorarioEntrega(DiaSemana.SEGUNDA,
+			HorarioFuncionamento outbackH2 = new HorarioFuncionamento(DiaSemana.SEGUNDA,
 					DateUtils.parseDate("11:00", HORARIO_PATTERN), DateUtils.parseDate("22:00", HORARIO_PATTERN),
 					outback);
-			HorarioEntrega outbackH3 = new HorarioEntrega(DiaSemana.TERCA,
+			HorarioFuncionamento outbackH3 = new HorarioFuncionamento(DiaSemana.TERCA,
 					DateUtils.parseDate("11:00", HORARIO_PATTERN), DateUtils.parseDate("22:00", HORARIO_PATTERN),
 					outback);
-			HorarioEntrega outbackH4 = new HorarioEntrega(DiaSemana.QUARTA,
+			HorarioFuncionamento outbackH4 = new HorarioFuncionamento(DiaSemana.QUARTA,
 					DateUtils.parseDate("11:00", HORARIO_PATTERN), DateUtils.parseDate("22:00", HORARIO_PATTERN),
 					outback);
-			HorarioEntrega outbackH5 = new HorarioEntrega(DiaSemana.QUINTA,
+			HorarioFuncionamento outbackH5 = new HorarioFuncionamento(DiaSemana.QUINTA,
 					DateUtils.parseDate("11:00", HORARIO_PATTERN), DateUtils.parseDate("22:00", HORARIO_PATTERN),
 					outback);
-			HorarioEntrega outbackH6 = new HorarioEntrega(DiaSemana.SEXTA,
+			HorarioFuncionamento outbackH6 = new HorarioFuncionamento(DiaSemana.SEXTA,
 					DateUtils.parseDate("11:00", HORARIO_PATTERN), DateUtils.parseDate("22:00", HORARIO_PATTERN),
 					outback);
-			HorarioEntrega outbackH7 = new HorarioEntrega(DiaSemana.SABADO,
+			HorarioFuncionamento outbackH7 = new HorarioFuncionamento(DiaSemana.SABADO,
 					DateUtils.parseDate("11:00", HORARIO_PATTERN), DateUtils.parseDate("22:00", HORARIO_PATTERN),
 					outback);
 
@@ -125,25 +125,25 @@ public class LoadInitialDatabase {
 					"Campinas", Estado.SP, Pais.BR, Categoria.CAFETERIAS);
 			abigail = restaurantesRepository.save(abigail);
 
-			HorarioEntrega abigailH1 = new HorarioEntrega(DiaSemana.DOMINGO,
+			HorarioFuncionamento abigailH1 = new HorarioFuncionamento(DiaSemana.DOMINGO,
 					DateUtils.parseDate("09:00", HORARIO_PATTERN), DateUtils.parseDate("15:00", HORARIO_PATTERN),
 					abigail);
-			HorarioEntrega abigailH2 = new HorarioEntrega(DiaSemana.SEGUNDA,
+			HorarioFuncionamento abigailH2 = new HorarioFuncionamento(DiaSemana.SEGUNDA,
 					DateUtils.parseDate("09:00", HORARIO_PATTERN), DateUtils.parseDate("18:00", HORARIO_PATTERN),
 					abigail);
-			HorarioEntrega abigailH3 = new HorarioEntrega(DiaSemana.TERCA,
+			HorarioFuncionamento abigailH3 = new HorarioFuncionamento(DiaSemana.TERCA,
 					DateUtils.parseDate("09:00", HORARIO_PATTERN), DateUtils.parseDate("18:00", HORARIO_PATTERN),
 					abigail);
-			HorarioEntrega abigailH4 = new HorarioEntrega(DiaSemana.QUARTA,
+			HorarioFuncionamento abigailH4 = new HorarioFuncionamento(DiaSemana.QUARTA,
 					DateUtils.parseDate("09:00", HORARIO_PATTERN), DateUtils.parseDate("18:00", HORARIO_PATTERN),
 					abigail);
-			HorarioEntrega abigailH5 = new HorarioEntrega(DiaSemana.QUINTA,
+			HorarioFuncionamento abigailH5 = new HorarioFuncionamento(DiaSemana.QUINTA,
 					DateUtils.parseDate("09:00", HORARIO_PATTERN), DateUtils.parseDate("18:00", HORARIO_PATTERN),
 					abigail);
-			HorarioEntrega abigailH6 = new HorarioEntrega(DiaSemana.SEXTA,
+			HorarioFuncionamento abigailH6 = new HorarioFuncionamento(DiaSemana.SEXTA,
 					DateUtils.parseDate("09:00", HORARIO_PATTERN), DateUtils.parseDate("18:00", HORARIO_PATTERN),
 					abigail);
-			HorarioEntrega abigailH7 = new HorarioEntrega(DiaSemana.SABADO,
+			HorarioFuncionamento abigailH7 = new HorarioFuncionamento(DiaSemana.SABADO,
 					DateUtils.parseDate("09:00", HORARIO_PATTERN), DateUtils.parseDate("17:00", HORARIO_PATTERN),
 					abigail);
 

@@ -72,7 +72,7 @@ public class Restaurante implements Serializable {
 	private Categoria categoria;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurante")
-	private Set<HorarioEntrega> horariosEntrega;
+	private Set<HorarioFuncionamento> horariosEntrega;
 
 	@Transient
 	private String port;
@@ -212,11 +212,11 @@ public class Restaurante implements Serializable {
 		this.categoria = categoria;
 	}
 
-	public Set<HorarioEntrega> getHorariosEntrega() {
+	public Set<HorarioFuncionamento> getHorariosEntrega() {
 		return horariosEntrega;
 	}
 
-	public void setHorariosEntrega(Set<HorarioEntrega> horariosEntrega) {
+	public void setHorariosEntrega(Set<HorarioFuncionamento> horariosEntrega) {
 		this.horariosEntrega = horariosEntrega;
 	}
 
