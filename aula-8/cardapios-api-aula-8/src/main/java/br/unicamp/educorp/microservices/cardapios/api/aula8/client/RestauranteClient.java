@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.unicamp.educorp.microservices.cardapios.api.aula8.model.dto.RestauranteDto;
 
-//sem eureka
+//sem ribbon
 //@FeignClient(value = "restaurantes-service", url = "http://localhost:8180/restaurantes/api")
 
-//com eureka
+//com ribbon/eureka
 @FeignClient(value = "restaurantes-service", path = "/restaurantes/api", configuration = FeignConfiguration.class)
 public interface RestauranteClient {
 
