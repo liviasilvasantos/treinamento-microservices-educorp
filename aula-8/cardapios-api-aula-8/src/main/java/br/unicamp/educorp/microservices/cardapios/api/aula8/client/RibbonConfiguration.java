@@ -8,10 +8,10 @@ import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RoundRobinRule;
 import com.netflix.loadbalancer.WeightedResponseTimeRule;
 
-@RibbonClient(name = "restaurantes-service")
+//@RibbonClient(name = "restaurantes-service")
 public class RibbonConfiguration {
 
-	@Bean
+//	@Bean
 	public IRule loadBlancingRule() {
 		// ignora servers que estão com alta taxa de conexões concorrentes, ou aqueles
 		// servers cuja conexão falharam nas 3 últimas vezes (irá ficar no estado de

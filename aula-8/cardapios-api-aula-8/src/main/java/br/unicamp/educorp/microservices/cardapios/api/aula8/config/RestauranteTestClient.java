@@ -21,7 +21,7 @@ public class RestauranteTestClient {
 		return args -> {
 			RestauranteDto outback = restTemplate.getForObject("http://localhost:8180/restaurantes/api/restaurantes/2",
 					RestauranteDto.class);
-			log.info("dados outback {}", outback);
+			log.info("rest template - dados outback {}", outback);
 		};
 	}
 
@@ -38,7 +38,7 @@ public class RestauranteTestClient {
 					.retrieve()//
 					.bodyToMono(RestauranteDto.class);
 
-			log.info("dados outback {}", outback.block());
+			log.info("web client - dados outback {}", outback.block());
 		};
 	}
 }
