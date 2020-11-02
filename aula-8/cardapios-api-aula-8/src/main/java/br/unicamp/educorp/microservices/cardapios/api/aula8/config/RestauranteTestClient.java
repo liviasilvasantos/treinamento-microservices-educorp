@@ -19,7 +19,7 @@ public class RestauranteTestClient {
 	@Bean
 	public CommandLineRunner runRestTemplate(RestTemplate restTemplate) throws Exception {
 		return args -> {
-			RestauranteDto outback = restTemplate.getForObject("http://localhost:8180/restaurantes/api/restaurantes/2",
+			RestauranteDto outback = restTemplate.getForObject("http://localhost:8180/restaurantes/2",
 					RestauranteDto.class);
 			log.info("rest template - dados outback {}", outback);
 		};
@@ -30,7 +30,7 @@ public class RestauranteTestClient {
 		return args -> {
 
 			WebClient client = WebClient//
-					.create("http://localhost:8180/restaurantes/api");
+					.create("http://localhost:8180");
 
 			Mono<RestauranteDto> outback = client//
 					.get()//
