@@ -11,12 +11,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 import br.unicamp.educorp.microservices.cardapios.api.aula8.model.dto.RestauranteDto;
 import reactor.core.publisher.Mono;
 
-@Configuration
+//@Configuration
 public class RestauranteTestClient {
 
 	private static final Logger log = LoggerFactory.getLogger(RestauranteTestClient.class);
 
-	@Bean
+	// @Bean
 	public CommandLineRunner runRestTemplate(RestTemplate restTemplate) throws Exception {
 		return args -> {
 			RestauranteDto outback = restTemplate.getForObject("http://localhost:8180/restaurantes/2",
@@ -25,7 +25,7 @@ public class RestauranteTestClient {
 		};
 	}
 
-	@Bean
+//	@Bean
 	public CommandLineRunner runWebClient() throws Exception {
 		return args -> {
 
