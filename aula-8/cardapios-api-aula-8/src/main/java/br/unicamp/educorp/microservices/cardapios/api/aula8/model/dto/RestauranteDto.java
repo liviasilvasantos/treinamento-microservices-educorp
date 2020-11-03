@@ -6,6 +6,15 @@ public class RestauranteDto {
 	private String nome;
 	private String port;
 
+	public RestauranteDto() {
+		super();
+	}
+
+	public RestauranteDto(String nome) {
+		super();
+		this.nome = nome;
+	}
+
 	public Integer getId() {
 		return id;
 	}
