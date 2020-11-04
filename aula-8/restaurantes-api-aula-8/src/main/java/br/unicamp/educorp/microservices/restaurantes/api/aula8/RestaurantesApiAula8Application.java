@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
+import brave.sampler.Sampler;
+
 @SpringBootApplication
 @EnableDiscoveryClient
 public class RestaurantesApiAula8Application {
@@ -30,6 +32,11 @@ public class RestaurantesApiAula8Application {
 		return args -> {
 			log.info("*** titulo={}, mensagem={}", titulo, mensagem);
 		};
+	}
+
+	@Bean
+	public Sampler defaultSampler() {
+		return Sampler.ALWAYS_SAMPLE;
 	}
 
 }
