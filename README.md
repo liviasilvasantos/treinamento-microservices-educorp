@@ -21,7 +21,7 @@ GET [/v3/cursos/{id}](http://localhost:8080/aula4/api/v3/cursos/{id})
 POST [/v3/cursos](http://localhost:8080/aula4/api/v3/cursos)  
 DELETE [/v3/cursos/{id}](http://localhost:8080/aula4/api/v3/cursos/{id})  
 PUT [/v3/cursos/{id}](http://localhost:8080/aula4/api/v3/cursos/{id})  
-@Deprecated POST [/v3/cursos/filter](http://localhost:8080/aula4/api/v3/cursos/filter)  
+<del>@Deprecated POST [/v3/cursos/filter](http://localhost:8080/aula4/api/v3/cursos/filter)</del>  
 GET [/v3/cursos/filter2?codigo={codigo}&descricao={descricao}](http://localhost:8080/aula4/api/v3/cursos/filter2?codigo={codigo}&descricao={descricao})
 
 ### Spring Hateoas
