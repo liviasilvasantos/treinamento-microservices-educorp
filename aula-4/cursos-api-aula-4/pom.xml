@@ -38,7 +38,6 @@
 			<version>2.3.8</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.zalando/logbook-spring-boot-starter -->
-		<!-- // dúvida aula 4 - alessandra -->
 		<dependency>
 			<groupId>org.zalando</groupId>
 			<artifactId>logbook-spring-boot-starter</artifactId>
