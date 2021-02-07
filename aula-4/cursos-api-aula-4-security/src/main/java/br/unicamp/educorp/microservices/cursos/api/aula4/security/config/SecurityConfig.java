@@ -9,10 +9,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+@EnableAuthorizationServer
+@EnableResourceServer
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -23,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.and()//
 				.httpBasic();
 	}
-	
+
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder authentication) throws Exception {
 		authentication//
@@ -32,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.and()//
 				.withUser("admin").password(passwordEncoder().encode("admin")).authorities("ROLE_ADMIN");
 	}
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
