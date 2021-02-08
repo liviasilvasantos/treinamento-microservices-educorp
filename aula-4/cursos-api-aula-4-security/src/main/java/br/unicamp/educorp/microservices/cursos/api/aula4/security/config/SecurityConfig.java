@@ -7,25 +7,27 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 @Configuration
 @EnableWebSecurity
-@EnableAuthorizationServer
-@EnableResourceServer
+//oauth config
+//@EnableAuthorizationServer
+//@EnableResourceServer
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()//
+		http//
+				.authorizeRequests()//
 				.antMatchers("/public/**").permitAll()// para requisicoes em public, permitir tudo
 				.antMatchers("/admin/**").hasRole("ADMIN")// para requisicoes em admin, precisa ter autorizacao de admin
 				.anyRequest().authenticated()// para qualquer outra requisicao, precisa estar autenticado
 				.and()//
-				.httpBasic();
+				.httpBasic().realmName("RealmEducorp").and()//
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 
 	@Autowired
