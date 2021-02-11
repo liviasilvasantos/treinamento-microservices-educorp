@@ -56,19 +56,19 @@ public class CursosController {
 	}
 
 	@GetMapping("/v3/cursos")
-	public ResponseEntity<List<Curso>> getAllCursos() {
+	public ResponseEntity<?> getAllCursos() {
 		log.info("buscando todos os cursos na porta {}", getHostPorta());
 		return new ResponseEntity<List<Curso>>(cursoRepository.findAll(), HttpStatus.OK);
 	}
 
 	@GetMapping("/v3/cursos/{id}")
-	public ResponseEntity<Curso> getCurso(@PathVariable Integer id) {
+	public ResponseEntity<?> getCurso(@PathVariable Integer id) {
 		log.info("buscando o curso {} na porta {}", id, getHostPorta());
 		return new ResponseEntity<Curso>(cursoRepository.findById(id).get(), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/v3/cursos")
-	public ResponseEntity<Curso> saveCurso(@RequestBody Curso curso) {
+	public ResponseEntity<?> saveCurso(@RequestBody Curso curso) {
 		log.info("salvando novo curso {} na porta {}", curso, getHostPorta());
 		try {
 			return new ResponseEntity<Curso>(cursoRepository.save(curso), HttpStatus.CREATED);
@@ -78,7 +78,7 @@ public class CursosController {
 	}
 
 	@DeleteMapping("/v3/cursos/{id}")
-	public ResponseEntity<Curso> deleteCurso(@PathVariable Integer id) {
+	public ResponseEntity<?> deleteCurso(@PathVariable Integer id) {
 		log.info("excluindo curso {} na porta {}", id, getHostPorta());
 		try {
 			cursoRepository.deleteById(id);
@@ -89,7 +89,7 @@ public class CursosController {
 	}
 
 	@PutMapping(value = "/v3/cursos/{id}")
-	public ResponseEntity<Curso> saveCurso(@PathVariable Integer id, @RequestBody Curso curso) {
+	public ResponseEntity<?> saveCurso(@PathVariable Integer id, @RequestBody Curso curso) {
 		log.info("atualizando curso id {} na porta {}", id, getHostPorta());
 
 		Optional<Curso> cursoEntity = cursoRepository.findById(id);
@@ -106,7 +106,7 @@ public class CursosController {
 
 	@Deprecated
 	@PostMapping(value = "/v3/cursos/filter")
-	public ResponseEntity<List<Curso>> getCursoByFilter(@RequestBody FiltroCurso filtro) {
+	public ResponseEntity<?> getCursoByFilter(@RequestBody FiltroCurso filtro) {
 		log.info("buscando o curso com filtro {} na porta {}", filtro, getHostPorta());
 
 		List<Curso> cursos = cursoRepository.findAllByCodigoContains(filtro.getCodigo());
@@ -119,7 +119,7 @@ public class CursosController {
 	}
 
 	@GetMapping(value = "/v3/cursos/filter2")
-	public ResponseEntity<List<Curso>> getCursoByFilter2(@ModelAttribute FiltroCurso filtro) {
+	public ResponseEntity<?> getCursoByFilter2(@ModelAttribute FiltroCurso filtro) {
 		log.info("buscando o curso com filtro {} na porta {}", filtro, getHostPorta());
 
 //		List<Curso> cursos = cursoRepository.findAllByCodigoContainsAndDescricaoContains(filtro.getCodigo(),
@@ -138,7 +138,7 @@ public class CursosController {
 	// Hateoas
 
 	@GetMapping("/v4/cursos/hateoas/{id}")
-	public ResponseEntity<EntityModel<Curso>> getCursoHateoas(@PathVariable Integer id) {
+	public ResponseEntity<?> getCursoHateoas(@PathVariable Integer id) {
 		log.info("buscando o curso hateoas {} na porta {}", id, getHostPorta());
 
 		Optional<Curso> curso = cursoRepository.findById(id);
@@ -155,7 +155,7 @@ public class CursosController {
 	}
 
 	@GetMapping("/v4/cursos/hateoas")
-	public ResponseEntity<List<EntityModel<Curso>>> getAllCursoHateoas() {
+	public ResponseEntity<?> getAllCursoHateoas() {
 		log.info("buscando todos os curso hateoas na porta {}", getHostPorta());
 
 		List<EntityModel<Curso>> cursosModel = new ArrayList<EntityModel<Curso>>();
@@ -186,7 +186,7 @@ public class CursosController {
 	}
 
 	@GetMapping("/v4/cursos/dto")
-	public ResponseEntity<List<CursoDto>> getAllCursosDto() {
+	public ResponseEntity<?> getAllCursosDto() {
 		log.info("buscando todos os cursos dto na porta {}", getHostPorta());
 
 		List<Curso> cursos = cursoRepository.findAll();
