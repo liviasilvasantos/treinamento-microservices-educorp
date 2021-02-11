@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -120,8 +122,11 @@ public class CursosController {
 	public ResponseEntity<List<Curso>> getCursoByFilter2(@ModelAttribute FiltroCurso filtro) {
 		log.info("buscando o curso com filtro {} na porta {}", filtro, getHostPorta());
 
-		List<Curso> cursos = cursoRepository.findAllByCodigoContainsAndDescricaoContains(filtro.getCodigo(),
-				filtro.getDescricao());
+//		List<Curso> cursos = cursoRepository.findAllByCodigoContainsAndDescricaoContains(filtro.getCodigo(),
+//				filtro.getDescricao());
+
+		Pageable page = PageRequest.of(filtro.getPage(), filtro.getPageSize());
+		List<Curso> cursos = cursoRepository.findAllByCodigoContains(filtro.getCodigo(), page);
 
 		if (cursos == null || cursos.isEmpty()) {
 			return ResponseEntity.notFound().build();
