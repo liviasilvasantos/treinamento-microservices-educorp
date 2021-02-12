@@ -3,6 +3,7 @@ package br.unicamp.educorp.microservices.cursos.api.aula4.security.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -32,12 +33,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and()//
 				.csrf().disable(); // desativa ataques Cross-Site Request Forgery (CSRF)
 
-		http//
-				.authorizeRequests()//
-				.antMatchers("/public/**").permitAll()// para requisicoes em public, permitir tudo
-				.antMatchers("/admin/**").hasRole("ADMIN")// para requisicoes em admin, precisa ter autorizacao de admin
-				.anyRequest().authenticated()// para qualquer outra requisicao, precisa estar autenticado
-				.and()//
+		// define restrições de acesso
+		http.authorizeRequests()//
+				// para requisicoes em public, permitir tudo, apenas no método get
+				.antMatchers(HttpMethod.GET, "/public/**").permitAll()//
+				// para requisicoes em admin, precisa ter autorizacao de admin
+				.antMatchers("/admin/**").hasRole("ADMIN")
+				// para qualquer outra requisicao, precisa estar autenticado
+				.anyRequest().authenticated()//
+				.and() //
+				// define forma de autenticação Basic (usuário: senha)
 				.httpBasic().realmName("RealmEducorp")//
 				.and()//
 				// desativa criação de sessão no backend
