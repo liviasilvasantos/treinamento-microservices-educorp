@@ -38,7 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/admin/**").hasRole("ADMIN")// para requisicoes em admin, precisa ter autorizacao de admin
 				.anyRequest().authenticated()// para qualquer outra requisicao, precisa estar autenticado
 				.and()//
-				.httpBasic().realmName("RealmEducorp").and()//
+				.httpBasic().realmName("RealmEducorp")//
+				.and()//
+				// desativa criação de sessão no backend
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 
