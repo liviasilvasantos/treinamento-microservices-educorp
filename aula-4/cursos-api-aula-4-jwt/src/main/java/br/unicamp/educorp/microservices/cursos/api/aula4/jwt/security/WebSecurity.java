@@ -2,6 +2,7 @@ package br.unicamp.educorp.microservices.cursos.api.aula4.jwt.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +17,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import br.unicamp.educorp.microservices.cursos.api.aula4.jwt.security.filter.JWTAuthenticationFilter;
 import br.unicamp.educorp.microservices.cursos.api.aula4.jwt.security.filter.JWTAuthorizationFilter;
 
+@Configuration
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
@@ -30,11 +32,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		http.cors()//
 				.and().csrf().disable()//
 				.authorizeRequests()//
+				// permite POST para a url de sign up
 				.antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL).permitAll()//
+				// qualquer outra requisição, precisa estar logado
 				.anyRequest().authenticated()//
-				// adiciona o filtro de autenticação JWT
+				// adiciona o filtro de autenticação JWT - login
 				.and().addFilter(new JWTAuthenticationFilter(authenticationManager()))
-				// adiciona o filtro de autorização JWT
+				// adiciona o filtro de autorização JWT - outros recursos
 				.addFilter(new JWTAuthorizationFilter(authenticationManager()))
 				// desativa criação de sessão no backend
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

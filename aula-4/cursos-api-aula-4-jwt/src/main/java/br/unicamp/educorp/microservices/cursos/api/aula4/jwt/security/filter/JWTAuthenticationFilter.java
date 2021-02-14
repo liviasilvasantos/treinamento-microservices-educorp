@@ -20,7 +20,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.unicamp.educorp.microservices.cursos.api.aula4.jwt.model.ApplicationUser;
+import br.unicamp.educorp.microservices.cursos.api.aula4.jwt.model.Usuario;
 import br.unicamp.educorp.microservices.cursos.api.aula4.jwt.security.SecurityConstants;
 
 /**
@@ -43,11 +43,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			throws AuthenticationException {
 		try {
 			// recebe os valores de login da requisição (username/password)
-			ApplicationUser creds = new ObjectMapper().readValue(req.getInputStream(), ApplicationUser.class);
+			Usuario creds = new ObjectMapper().readValue(req.getInputStream(), Usuario.class);
 
 			// realiza a autenticação conforme implementação definida no WebSecurity Config.
-			return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(creds.getUsername(),
-					creds.getPassword(), new ArrayList<>()));
+			return authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(creds.getUsuario(), creds.getSenha(), new ArrayList<>()));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -62,7 +62,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 		// gera o token JWT - que expira em 10 dias
 		String token = JWT.create()//
+				// define o assunto do token
 				.withSubject(((User) auth.getPrincipal()).getUsername()) //
+				// define o tempo de expiração do token
 				.withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME)) //
 				// algoritmo se assinatura do token e qual o segredo
 				.sign(Algorithm.HMAC512(SecurityConstants.SECRET.getBytes()));

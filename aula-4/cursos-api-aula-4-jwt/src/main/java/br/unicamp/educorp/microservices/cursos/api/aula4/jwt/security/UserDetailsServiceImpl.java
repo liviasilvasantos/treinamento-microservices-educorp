@@ -8,28 +8,28 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.unicamp.educorp.microservices.cursos.api.aula4.jwt.model.ApplicationUser;
-import br.unicamp.educorp.microservices.cursos.api.aula4.jwt.repository.ApplicationUserRepository;
+import br.unicamp.educorp.microservices.cursos.api.aula4.jwt.model.Usuario;
+import br.unicamp.educorp.microservices.cursos.api.aula4.jwt.repository.UsuariosRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	private ApplicationUserRepository applicationUserRepository;
+	private UsuariosRepository usuarioRepository;
 
-	public UserDetailsServiceImpl(ApplicationUserRepository applicationUserRepository) {
-		this.applicationUserRepository = applicationUserRepository;
+	public UserDetailsServiceImpl(UsuariosRepository usuarioRepository) {
+		this.usuarioRepository = usuarioRepository;
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String usuario) throws UsernameNotFoundException {
 		// localiza usuário no repository
-		ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
+		Usuario usuarioRepo = usuarioRepository.findByUsuario(usuario);
 
-		if (applicationUser == null) {
-			throw new UsernameNotFoundException(username);
+		if (usuarioRepo == null) {
+			throw new UsernameNotFoundException(usuario);
 		}
 
-		return new User(applicationUser.getUsername(), applicationUser.getPassword(), Collections.emptyList());
+		return new User(usuarioRepo.getUsuario(), usuarioRepo.getSenha(), Collections.emptyList());
 	}
 
 }
