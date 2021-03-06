@@ -3,6 +3,7 @@ package br.unicamp.educorp.microservices.cursos.api.aula4.controller;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -68,10 +70,16 @@ public class CursosController {
 	}
 
 	@PostMapping(value = "/v3/cursos")
-	public ResponseEntity<?> saveCurso(@RequestBody Curso curso) {
+	public ResponseEntity<?> saveCurso(@RequestBody Curso curso, UriComponentsBuilder uriBuilder) {
 		log.info("salvando novo curso {} na porta {}", curso, getHostPorta());
 		try {
-			return new ResponseEntity<Curso>(cursoRepository.save(curso), HttpStatus.CREATED);
+			Curso salvo = cursoRepository.save(curso);
+
+			// retorna um path para o curso salvo no header da resposta
+			URI path = uriBuilder.path("/v3/cursos/{id}").buildAndExpand(salvo.getId()).toUri();
+			return ResponseEntity.created(path).body(salvo);
+
+//			return new ResponseEntity<Curso>(cursoRepository.save(curso), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<Curso>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
