@@ -17,6 +17,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -34,6 +36,7 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
+import br.unicamp.educorp.microservices.cursos.api.aula4.hateoas.LinkWithMethod;
 import br.unicamp.educorp.microservices.cursos.api.aula4.model.Curso;
 import br.unicamp.educorp.microservices.cursos.api.aula4.model.CursoDto;
 import br.unicamp.educorp.microservices.cursos.api.aula4.model.filter.FiltroCurso;
@@ -151,10 +154,22 @@ public class CursosController {
 
 		Optional<Curso> curso = cursoRepository.findById(id);
 
+		List<Link> links = new ArrayList<Link>();
+
 		if (curso.isPresent()) {
+			Link linkSelf = linkTo(methodOn(CursosController.class).getCurso(id)).withSelfRel();
+			Link linkAll = linkTo(methodOn(CursosController.class).getAllCursos()).withRel("all");
+
+			// adição do método http
+			links.add(new LinkWithMethod(linkSelf, HttpMethod.GET.toString()));
+			links.add(new LinkWithMethod(linkAll, HttpMethod.GET.toString()));
+
 			EntityModel<Curso> model = EntityModel.of(curso.get(), //
-					linkTo(methodOn(CursosController.class).getCurso(id)).withSelfRel(),
-					linkTo(methodOn(CursosController.class).getAllCursos()).withRel("all"));
+					links);
+
+//			EntityModel<Curso> model = EntityModel.of(curso.get(), //
+//					linkTo(methodOn(CursosController.class).getCurso(id)).withSelfRel(),
+//					linkTo(methodOn(CursosController.class).getAllCursos()).withRel("all"));
 
 			return ResponseEntity.ok(model);
 		} else {
