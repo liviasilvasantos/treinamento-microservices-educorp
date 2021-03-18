@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
-import brave.sampler.Sampler;
+//import brave.sampler.Sampler;
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -34,9 +34,9 @@ public class RestaurantesApiAula8Application {
 		};
 	}
 
-	@Bean
-	public Sampler defaultSampler() {
-		return Sampler.ALWAYS_SAMPLE;
-	}
+//	@Bean
+//	public Sampler defaultSampler() {
+//		return Sampler.ALWAYS_SAMPLE;
+//	}
 
 }
