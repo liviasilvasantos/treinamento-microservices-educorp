@@ -25,7 +25,7 @@ public class RestauranteTestClient {
 		};
 	}
 
-//	@Bean
+	// @Bean
 	public CommandLineRunner runWebClient() throws Exception {
 		return args -> {
 

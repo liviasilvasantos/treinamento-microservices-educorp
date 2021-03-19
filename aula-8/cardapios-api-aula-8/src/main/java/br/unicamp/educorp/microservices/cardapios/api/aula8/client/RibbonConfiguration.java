@@ -12,7 +12,7 @@ import com.netflix.loadbalancer.WeightedResponseTimeRule;
 public class RibbonConfiguration {
 
 //	@Bean
-	public IRule loadBlancingRule() {
+	public IRule loadBalancingRule() {
 		// ignora servers que estão com alta taxa de conexões concorrentes, ou aqueles
 		// servers cuja conexão falharam nas 3 últimas vezes (irá ficar no estado de
 		// 'circuit tripped' por 30 segundos)

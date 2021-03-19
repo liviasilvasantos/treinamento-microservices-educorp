@@ -2,8 +2,6 @@ package br.unicamp.educorp.microservices.restaurantes.api.aula8.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +32,6 @@ public class RestaurantesController {
 	@Autowired
 	private Environment environment;
 
-	@Autowired
-	private HttpServletRequest requestContext;
-
 	private String getHostPorta() {
 		return environment.getProperty("local.server.port");
 	}
@@ -51,7 +46,7 @@ public class RestaurantesController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Restaurante> getById(@PathVariable Integer id) throws RestauranteNaoEncontradoException {
-		log.info("getById {} [trx-id={}]", id, requestContext.getHeader("trx-id"));
+		log.info("getById {}", id);
 		Restaurante restaurante = restaurantesService.buscarRestaurante(id);
 		restaurante.setPort(getHostPorta());
 		return ResponseEntity.ok(restaurante);

@@ -3,8 +3,6 @@ package br.unicamp.educorp.microservices.cardapios.api.aula8.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +29,9 @@ public class CardapiosController {
 	@Autowired
 	private RestauranteClient restauranteClient;
 
-	@Autowired
-	private HttpServletRequest requestContext;
-
 	@GetMapping
 	public ResponseEntity<List<Cardapio>> getAll() {
-		log.info("getAll [trx-id={}]", requestContext.getHeader("trx-id"));
+		log.info("getAll");
 
 		List<Cardapio> cardapios = cardapiosRepository.buscarTodosCardapiosComItens();
 		cardapios.forEach(c -> {
@@ -49,7 +44,7 @@ public class CardapiosController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Cardapio> getById(@PathVariable Integer id) {
-		log.info("getById {} [trx-id={}]", id, requestContext.getHeader("trx-id"));
+		log.info("getById {}", id);
 
 		Optional<Cardapio> cardapio = cardapiosRepository.buscarCardapioComItens(id);
 

@@ -9,6 +9,7 @@
 		<version>2.3.8.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+	
 	<groupId>br.unicamp.educorp.microservices</groupId>
 	<artifactId>restaurantes-api-aula-8</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -17,7 +18,6 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<spring-boot-admin.version>2.3.0</spring-boot-admin.version>
 		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
 	</properties>
 
@@ -34,11 +34,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>de.codecentric</groupId>
-			<artifactId>spring-boot-admin-starter-client</artifactId>
-		</dependency>
-
+		
 		<!-- Eureka -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -51,6 +47,7 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -61,25 +58,7 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
-
-		<!-- Config Client -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.cloud</groupId> -->
-<!-- 			<artifactId>spring-cloud-starter-config</artifactId> -->
-<!-- 		</dependency> -->
-
-		<!-- Sleuth -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.cloud</groupId> -->
-<!-- 			<artifactId>spring-cloud-starter-sleuth</artifactId> -->
-<!-- 		</dependency> -->
-
-		<!-- Zipkin -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.cloud</groupId> -->
-<!-- 			<artifactId>spring-cloud-starter-zipkin</artifactId> -->
-<!-- 		</dependency> -->
-
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -99,13 +78,6 @@
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
 				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>de.codecentric</groupId>
-				<artifactId>spring-boot-admin-dependencies</artifactId>
-				<version>${spring-boot-admin.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

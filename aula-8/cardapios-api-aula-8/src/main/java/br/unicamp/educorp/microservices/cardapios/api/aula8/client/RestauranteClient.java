@@ -6,14 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import br.unicamp.educorp.microservices.cardapios.api.aula8.model.dto.RestauranteDto;
 
-//sem ribbon
-//@FeignClient(value = "restaurantes-service", url = "http://localhost:8180/restaurantes/api")
-
-//com ribbon/eureka
-//@FeignClient(value = "restaurantes-service", path = "/restaurantes/api", configuration = FeignConfiguration.class)
-
-//com gateway
-@FeignClient(value = "restaurantes-service", configuration = FeignConfiguration.class) //, fallback = RestauranteClientFallback.class)
+//@FeignClient(value = "restaurantes-service", url = "http://localhost:8180/restaurantes/api", configuration = FeignConfiguration.class)
+@FeignClient(value = "restaurantes-service", path = "/restaurantes/api", configuration = FeignConfiguration.class)
 public interface RestauranteClient {
 
 	// @RequestMapping(method = RequestMethod.GET, value = "/restaurantes/{id}")
