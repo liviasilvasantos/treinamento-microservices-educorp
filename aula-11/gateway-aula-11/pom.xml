@@ -45,6 +45,12 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- Hystrix Dashboard -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+		</dependency>
+
 		<!-- Sleuth -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
